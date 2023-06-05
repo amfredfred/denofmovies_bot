@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "@enviro/metadata": "^1.5.1",
+    "@hono/node-server": "^1.0.2",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.1.4",
+    "hono": "^3.2.4",
+    "jszip": "^3.10.1",
+    "mongoose": "^7.2.2",
+    "node-telegram-bot-api": "^0.61.0"
+  },
+  "name": "denofmovies_bot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "nodemon src/index",
+    "start": "node src/index"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

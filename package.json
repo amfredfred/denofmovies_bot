@@ -2,12 +2,17 @@
   "dependencies": {
     "@enviro/metadata": "^1.5.1",
     "@hono/node-server": "^1.0.2",
+    "adm-zip": "^0.5.10",
     "crypto": "^1.0.1",
     "dotenv": "^16.1.4",
+    "file-saver": "^2.0.5",
     "hono": "^3.2.4",
+    "instagram-url-direct": "^1.0.13",
     "jszip": "^3.10.1",
     "mongoose": "^7.2.2",
-    "node-telegram-bot-api": "^0.61.0"
+    "node-telegram-bot-api": "^0.61.0",
+    "nodejs-file-downloader": "^4.12.1",
+    "ytdl-core": "^4.11.4"
   },
   "name": "denofmovies_bot",
   "version": "1.0.0",

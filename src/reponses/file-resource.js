@@ -11,7 +11,9 @@ const fileResource = (post) => ({
     fileRelativePath: post?.file_relative_path,
     filePlaceHolder: post?.file_place_holder,
     fileOriginalSize: post?.file_original_size,
-    fileParentPath: post?.file_parent_path
+    fileParentPath: post?.file_parent_path,
+    fileDescription: post?.file_description,
+    fileThumbnails: post?.file_thumbnails
 })
 
 

@@ -4,8 +4,8 @@ const crypto = require('crypto')
 const { sizeInMb } = require('./tomb')
 
 
-const dowloader = async (filePath, extension, fileName) => {
-    const temp_path = `src/temps/${fileName || ("FILE-TEMP-" + crypto.randomBytes(5).toString('hex').toUpperCase())}.${extension}`
+const dowloader = async (filePath, fileName) => {
+    const temp_path = `src/uploads/${fileName}`
     const file = fs.createWriteStream(temp_path);
     const request = https.get(filePath, function (response) { response.pipe(file); });
 

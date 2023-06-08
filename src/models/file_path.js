@@ -11,7 +11,10 @@ const FilePathSchema = new mongoose.Schema({
     file_relative_path: { type: String, requireed: true },
     file_place_holder: { type: String },
     file_original_size: { type: String, default: 0 },
-    file_parent_path: { type: String }
+    file_parent_path: { type: String },
+    file_description: { type: String },
+    file_thumbnails: { type: String },
+    file_download_link: { type: String }
 }, { timestamps: true })
 
 module.exports = mongoose.model('FilePath', FilePathSchema)

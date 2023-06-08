@@ -12,6 +12,5 @@ const moviewResource = (post) => ({
     episode: post?.episode
 })
 
-
 const movieCollection = (posts = []) => posts?.map(post => moviewResource(post))
 module.exports = { movieCollection, moviewResource }

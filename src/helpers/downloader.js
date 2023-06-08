@@ -5,7 +5,7 @@ const { sizeInMb } = require('./tomb')
 
 
 const dowloader = async (filePath, fileName) => {
-    const temp_path = `/src/uploads/${fileName}`
+    const temp_path = `./src/uploads/${fileName}`
     const file = fs.createWriteStream(temp_path);
     const request = https.get(filePath, function (response) { response.pipe(file); });
 

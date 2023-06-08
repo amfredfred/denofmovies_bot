@@ -26,9 +26,9 @@ denBot.on('message', async (request) => {
         const file = await denBot.getFileLink(_file)
         const file_mine = file?.slice(-5).split?.('.')[1]
         const getCaption = (caption || text).toLocaleLowerCase()?.replace(/\s+/g, '-')?.replace(/[\W]/g, '-').replace(/--/g, '-')?.trim()
-        const transformedCaption = getCaption?.split('title')?.[1]?.split('\n')?.[0] || getCaption
+        const transformedCaption = (getCaption?.split('title')?.[1]?.split('\n')?.[0] || getCaption)?.replace(/-/, '-')
         const file_id = `${transformedCaption}-${(crypto.randomBytes(6).toString('hex')).toUpperCase()}`
-        const { temp_path, temp_size } = await dowloader(file, `${file_id}.${file_mine}`)
+        const { temp_path, temp_size } = await dowloader(file, `temps/${file_id}.${file_mine}`)
         const { saved_to_relative_path: file_relative_path, file_size } = await zip(temp_path, file_id)
         //Handling thumbnails
         let file_thumbnails = ''
@@ -36,7 +36,7 @@ denBot.on('message', async (request) => {
         const thumb_mime = file_thumbnails_link?.slice(-5).split?.('.')[1]
         const { temp_path: thum_temp } = await dowloader(file_thumbnails_link, `thumbnails/${file_id}.${thumb_mime}`)
         file_thumbnails = thum_temp
-        const file_download_link = `https://statugram.com/files?f=${file_id}`
+        const file_download_link = `https://statugram.com/watch?v=${file_id}`
 
         const nFilez = new Files({
             file_id,

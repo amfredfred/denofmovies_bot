@@ -13,7 +13,8 @@ const fileResource = (post) => ({
     fileOriginalSize: post?.file_original_size,
     fileParentPath: post?.file_parent_path,
     fileDescription: post?.file_description,
-    fileThumbnails: post?.file_thumbnails
+    fileThumbnails: post?.file_thumbnails,
+    fileCreatedAt: post?.updated_at
 })
 
 

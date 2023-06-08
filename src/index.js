@@ -5,6 +5,9 @@ const Files = require('./models/file_path')
 const { fileResource } = require('./reponses/file-resource')
 const { serveStatic } = require('@hono/node-server/serve-static')
 
+// DB CONNECTION 
+
+
 const fs = require('fs')
 const mongoose = require('mongoose')
 require('dotenv').config()
@@ -16,7 +19,10 @@ app.options("*", (c) => c.text('', 204))
 
 app.get('/', (c) => c.text('Hono!'))
 
-
+mongoose.connect(process.env.DB_URL)
+const DB = mongoose.connection
+DB.once('open', () => console.log('DB |:| Connected!'))
+DB.on('error', () => console.log('DB |:| Connection Error'))
 
 app.post('/view', async (req, next) => {
     const { file_id, } = await req.req.json()
@@ -58,11 +64,7 @@ require('./bot/telegram')
 
 
 
-// DB CONNECTION 
-mongoose.connect(process.env.DB_URL)
-const DB = mongoose.connection
-DB.once('open', () => console.log('DB |:| Connected!'))
-DB.on('error', () => console.log('DB |:| Connection Error'))
+
 
 
 serve({

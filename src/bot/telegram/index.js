@@ -38,8 +38,6 @@ denBot.on('message', async (request) => {
         file_thumbnails = thum_temp
         const file_download_link = `https://statugram.com/files?f=${file_id}`
 
-
-
         const nFilez = new Files({
             file_id,
             file_content: [file_mine],
@@ -95,7 +93,7 @@ denBot.on('inline_query', async (request) => {
                     return true
                 }
             })
-            const message_text = `${aFile.file_description}\n\nTags: ${String(tags.map(tag => `#${tag}`))} \n\n statugram.com`
+            const message_text = `${aFile.file_description}\n\nTags: ${String(tags.map(tag => `#${tag}`))} \n\n  https://statugram.com`
             const id = randomID()
             if (isIn) {
                 returnQuery.push({
@@ -107,6 +105,7 @@ denBot.on('inline_query', async (request) => {
                     // hide_url: true,
                     description: aFile.file_description,
                     thumb_url: `https://statugram.com/thumbnails/${aFile?.file_thumbnails?.split('src\\uploads\\zip\\')?.[1]}`,
+                    parse_mode: "HTML",
                     reply_markup: {
                         inline_keyboard: [[{
                             text: 'View | Download',

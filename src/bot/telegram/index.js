@@ -136,5 +136,6 @@ denBot.on('inline_query', async (request) => {
     }
 })
 
+console.log("TELEGRAM APP STARTED")
 
 module.exports = this   

@@ -7,14 +7,13 @@ const { serveStatic } = require('@hono/node-server/serve-static')
 
 // DB CONNECTION 
 
-
 const fs = require('fs')
 const mongoose = require('mongoose')
 require('dotenv').config()
 
 const app = new Hono()
 app.use("*", cors?.())
-app.use('/uploads/*', serveStatic({ root: './src' }))
+app.use('/tmp/*', serveStatic({ root: './' }))
 app.options("*", (c) => c.text('', 204))
 
 app.get('/', (c) => c.text('Hono!'))

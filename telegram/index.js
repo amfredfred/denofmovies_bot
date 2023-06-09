@@ -8,7 +8,7 @@ const token = process.env.YOUR_TELEGRAM_BOT_TOKEN || 'YOUR_TELEGRAM_BOT_TOKEN';
 
 // Create a bot that uses 'polling' to fetch new updates
 const denBot = new TelegramBot(token, { polling: true });
-const randomID = () => crypto.randomBytes(10).toString('hex')
+const randomID = () => crypto.randomBytes(5).toString('hex').toLocaleUpperCase()
 
 denBot.on('message', async (request) => {
 
@@ -21,12 +21,12 @@ denBot.on('message', async (request) => {
         const file_mine = file?.slice(-5).split?.('.')[1]
         const file_caption = title(caption || text)
         const file_id = randomID()
-        // const { temp_path, temp_size } = await dowloader(file, `temp/zipped${file_id}.${file_mine}`)
+        // const { temp_path, temp_size } = await dowloader(file, `tmp/zipped${file_id}.${file_mine}`)
         // const { saved_to_relative_path: file_relative_path, file_size } = await zip(temp_path, file_id)
         //Handling thumbnails
         const file_thumbnails_link = await denBot.getFileLink(_sent?.thumb?.file_id || _sent?.thumbnail?.file_id)
         const thumb_mime = file_thumbnails_link?.slice(-5).split?.('.')[1]
-        const { temp_path: file_thumbnails } = await dowloader(file_thumbnails_link, `temp/thumbnails/${file_id}.${thumb_mime}`)
+        const { temp_path: file_thumbnails } = await dowloader(file_thumbnails_link, `tmp/thumbnails/${file_id}.${thumb_mime}`)
         const file_download_link = `https://statugram.com/watch?v=${file_id}`
 
         const nFilez = new Files({
@@ -91,7 +91,7 @@ denBot.on('inline_query', async (request) => {
                 returnQuery.push({
                     id,
                     type: 'article',
-                    title: `${(description?.split('title')?.[1]?.replace(':', '') ?? (description?.split('  ')?.[0] || description?.split('\n')?.[0]) ?? 'No Title').toLocaleUpperCase()}`,
+                    title: `${aFile.file_caption}`,
                     input_message_content: { message_text },
                     url: 'statugram.com',
                     // hide_url: true,

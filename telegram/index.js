@@ -1,12 +1,7 @@
-const { model } = require('mongoose')
 require('dotenv').config()
 const crypto = require('crypto')
 const TelegramBot = require('node-telegram-bot-api');
-const mongoose = require('mongoose')
-const { zip } = require('../helpers/zipper')
-const { saveAs } = require('../helpers/savefile')
-const { dowloader } = require('../helpers/downloader')
-const Monies = require('../models/movie')
+const { dowloader, title } = require('../helpers/')
 const Files = require('../models/file_path')
 
 const token = process.env.YOUR_TELEGRAM_BOT_TOKEN || 'YOUR_TELEGRAM_BOT_TOKEN';
@@ -17,25 +12,21 @@ const randomID = () => crypto.randomBytes(10).toString('hex')
 
 denBot.on('message', async (request) => {
 
-    const { chat, text, video, audio, photo, voice, caption, file, document } = request
-
+    const { chat, text, video, caption, document } = request
     const _sent = video || document
-    if (_sent?.file_id) {
 
+    if (_sent?.file_id) {
         const _file = _sent?.file_id
         const file = await denBot.getFileLink(_file)
         const file_mine = file?.slice(-5).split?.('.')[1]
-        const getCaption = (caption || text)/*?.toLocaleLowerCase()*/?.replace(/\s+/g, ' ')/*?.replace(/[\W]/g, '-').replace(/--/g, '-')?.trim()*/
-        const transformedCaption = (getCaption?.split('title')?.[1]?.split('\n')?.[0] ?? getCaption)
-        const file_id = (/*`${transformedCaption}-*/`${randomID()}`)
+        const file_caption = title(caption || text)
+        const file_id = randomID()
         // const { temp_path, temp_size } = await dowloader(file, `temp/zipped${file_id}.${file_mine}`)
         // const { saved_to_relative_path: file_relative_path, file_size } = await zip(temp_path, file_id)
         //Handling thumbnails
-        let file_thumbnails = ''
         const file_thumbnails_link = await denBot.getFileLink(_sent?.thumb?.file_id || _sent?.thumbnail?.file_id)
         const thumb_mime = file_thumbnails_link?.slice(-5).split?.('.')[1]
-        const { temp_path: thum_temp } = await dowloader(file_thumbnails_link, `temp/thumbnails/${file_id}.${thumb_mime}`)
-        file_thumbnails = thum_temp
+        const { temp_path: file_thumbnails } = await dowloader(file_thumbnails_link, `temp/thumbnails/${file_id}.${thumb_mime}`)
         const file_download_link = `https://statugram.com/watch?v=${file_id}`
 
         const nFilez = new Files({
@@ -44,16 +35,16 @@ denBot.on('message', async (request) => {
             file_size: 0,
             file_original_size: 0,
             file_uploader: 'DEV',
-            file_caption: transformedCaption || "No title",
-            // file_relative_path,
+            file_caption,
             file_place_holder: '',
             file_parent_path: file,
             file_description: caption || text,
             file_thumbnails,
             file_download_link,
-            // file_uploaded_from: '',
-            // file_download_count: 1,
-            // file_type,
+            // file_relative_path,
+            // file_uploaded_from,
+            // file_download_count,
+            // file_typex,
         })
 
         const [saved] = await Promise.allSettled([nFilez.save()])

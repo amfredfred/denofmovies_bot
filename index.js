@@ -58,9 +58,9 @@ app.post('/download', async (req, next) => {
     }
     const requested = fileResource(file?.value)
     return req.json(requested)
-}) 
+})
 
-require('./bot/telegram')
+require('./telegram')
 
 
 

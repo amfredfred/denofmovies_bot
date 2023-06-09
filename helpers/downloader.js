@@ -1,14 +1,13 @@
 const https = require('https'); // or 'https' for https:// URLs
 const fs = require('fs');
-const crypto = require('crypto')
 const { sizeInMb } = require('./tomb')
 
 
-const dowloader = async (filePath, fileName) => {
-    const temp_path = `./src/uploads/${fileName}`
-    const file = fs.createWriteStream(temp_path);
-    const request = https.get(filePath, function (response) { response.pipe(file); });
 
+const dowloader = async (filePath, fileName) => {
+    const temp_path = fileName
+    const file = fs.createWriteStream(temp_path)
+    const request = https.get(filePath, function (response) { response.pipe(file); });
     return new Promise((resolved => {
         file.on("finish", async () => {
             file.close();

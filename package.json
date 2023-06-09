@@ -19,8 +19,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "nodemon src/index",
-    "start": "node src/index"
+    "watch": "nodemon index",
+    "start": "node index"
   },
   "keywords": [],
   "author": "",

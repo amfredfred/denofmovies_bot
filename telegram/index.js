@@ -26,7 +26,7 @@ denBot.on('message', async (request) => {
         //Handling thumbnails
         const file_thumbnails_link = await denBot.getFileLink(_sent?.thumb?.file_id || _sent?.thumbnail?.file_id)
         const thumb_mime = file_thumbnails_link?.slice(-5).split?.('.')[1]
-        const { temp_path: file_thumbnails } = await dowloader(file_thumbnails_link, `tmp/thumbnails/${file_id}.${thumb_mime}`)
+        const { temp_path: file_thumbnails } = await dowloader(file_thumbnails_link, `/tmp/thumbnails/${file_id}.${thumb_mime}`)
         const file_download_link = `https://statugram.com/watch?v=${file_id}`
 
         const nFilez = new Files({

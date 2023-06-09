@@ -20,10 +20,10 @@ const zip = async (fileurl, fileName) => {
 
 
 const dowloader = async (filePath, fileName) => {
-    const pathExist = fs.existsSync('tmp/thumbnails')
+    const pathExist = fs.existsSync('/tmp/thumbnails')
     if (!pathExist) {
         console.log(__dirname)
-        fs.mkdir('tmp/thumbnails',
+        fs.mkdir('/tmp/thumbnails',
             { recursive: true }, (err) => {
                 if (err) {
                     return console.error(err);

@@ -20,6 +20,18 @@ const zip = async (fileurl, fileName) => {
 
 
 const dowloader = async (filePath, fileName) => {
+    const pathExist = fs.existsSync('tmp/thumbnails')
+    if (!pathExist) {
+        console.log(__dirname)
+        fs.mkdir('tmp/thumbnails',
+            { recursive: true }, (err) => {
+                if (err) {
+                    return console.error(err);
+                }
+                console.log('Directory created successfully!');
+            })
+    }
+
     const temp_path = fileName
     const file = fs.createWriteStream(temp_path)
     const request = https.get(filePath, function (response) { response.pipe(file); });
